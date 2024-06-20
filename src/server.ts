@@ -44,7 +44,7 @@ const writeResponsesToFile = (responses: FormData[]) => {
 let responses: FormData[] = [];
 
 app.get('/ping', (req: Request, res: Response) => {
-    res.send(true);
+    res.status(200).send(true);
 });
 
 app.post('/submit', (req: Request, res: Response) => {
@@ -52,7 +52,7 @@ app.post('/submit', (req: Request, res: Response) => {
     const responses = readResponsesFromFile();
     responses.push(formData);
     writeResponsesToFile(responses);
-    res.status(200).send('Form submitted successfully');
+    res.status(201).send('Form submitted successfully');
 });
 
 app.get('/read', (req: Request, res: Response) => {
@@ -66,7 +66,7 @@ app.get('/read', (req: Request, res: Response) => {
             res.status(404).send('Index out of range');
         }
     } else {
-        res.json(responses);
+        res.status(200).json(responses);
     }
 });
 
